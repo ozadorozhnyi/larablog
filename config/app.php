@@ -108,6 +108,55 @@ return [
 
     'faker_locale' => 'en_US',
 
+/*
+    |--------------------------------------------------------------------------
+    | Application DataBase Seeding Options
+    |--------------------------------------------------------------------------
+    |
+    | Allows you to configure the amount of data generated for each database table.
+    |
+    | The amount of data generated can bee differ, depending on the testing conditions
+    | as well as the operating mode of the application.
+    |
+    */
+
+    'app_seed' => [
+        /**
+         * dev: 1
+         * testing: 8..18
+         * production: 10..20
+         */
+        "categories" => env('DB_SEED_CATEGORIES', rand(10, 20)),
+
+        /**
+         * dev: 5
+         * testing: 5..22
+         * production: 10..20
+         */
+        "categories_posts" => env('DB_SEED_CATEGORIES_POSTS', rand(10, 20)),
+
+        /**
+         * dev: 5
+         * testing: 3..99
+         * production: 10..99
+         */
+        "posts_comments" => env('DB_SEED_POSTS_COMMENTS', rand(10, 99)),
+
+        /**
+         * dev: 3
+         * testing: 3..6
+         * production: 6..8
+         */
+        "categories_comments" => env('DB_SEED_CATEGORIES_COMMENTS', rand(6, 8)),
+
+        /**
+         * dev: 10
+         * testing: 10..20
+         * production: 100..2000
+         */
+        "visitors" => env('DB_SEED_VISITORS', rand(100, 2000)),
+    ],
+
     /*
     |--------------------------------------------------------------------------
     | Encryption Key
