@@ -15,7 +15,11 @@ class CreateVisitorsTable extends Migration
     {
         Schema::create('visitors', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string("user_agent", 200);
+            $table->string("raw", 200)->comment("user agent full string");
+            $table->string("browser", 64)->comment("browser name: Chrome, IE, Safari, Firefox");
+            $table->string("version", 64)->comment("browser version (not the same platform version");
+            $table->string("device", 64)->comment("device name, if mobile: iPhone, Nexus, AsusTablet...");
+            $table->string("platform", 64)->comment("operating system: Ubuntu, Windows, OS X...");
             $table->timestamps();
         });
     }

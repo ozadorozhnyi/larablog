@@ -38,7 +38,7 @@ class AppDataSeeder extends Seeder
         );
 
         // populate the visitors table
-        factory(App\Visitor::class, (int)$seedCnf->visitors)->make();
+        factory(App\Visitor::class, (int)$seedCnf->visitors)->create();
 
     }
 
