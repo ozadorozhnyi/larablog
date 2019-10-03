@@ -121,15 +121,15 @@ h1, h2, h3, h4, h5, h6 {
 /*
  * Blog posts
  */
-.blog-post {
-  margin-bottom: 4rem;
-}
 .blog-post-title {
   margin-bottom: .25rem;
   font-size: 2.5rem;
 }
+  .blog-post-title a, .blog-post-title a:hover{
+    color: black;
+  }
+
 .blog-post-meta {
-  margin-bottom: 1.25rem;
   color: #999;
 }
 
@@ -138,9 +138,9 @@ h1, h2, h3, h4, h5, h6 {
  */
 .blog-footer {
   padding: 2.5rem 0;
-  color: #999;
+  color: #fff;
   text-align: center;
-  background-color: #f9f9f9;
+  background-color: #1a1a1a;
   border-top: .05rem solid #e5e5e5;
 }
 .blog-footer p:last-child {

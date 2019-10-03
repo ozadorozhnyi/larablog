@@ -11,35 +11,48 @@ class AppDataSeeder extends Seeder
      */
     public function run()
     {
-        $seedCnf = (object)config('app.app_seed');
+        $seedingConf = (object)config('app.seeding');
 
-        // populate the tables with categories, posts, comments and uploaded files
-        factory(App\Category::class, (int)$seedCnf->categories)->create()->each(
-            function ($category) use ($seedCnf) {
-                // categories posts
+        // Populate the tables with categories, posts, comments and uploaded files
+        factory(App\Category::class, (int)$this->random($seedingConf->categories))->create()->each(
+            function ($category) use ($seedingConf) {
+                // Categories Posts
                 $category->posts()->createMany(
-                    factory(App\Post::class, (int)$seedCnf->categories_posts)->make()->toArray())->each(
-                        function ($post) use ($seedCnf) {
-                            // post uploaded file
+                    factory(App\Post::class, (int)$this->random($seedingConf->posts))->make()->toArray())->each(
+                        function ($post) use ($seedingConf) {
+                            // Post Uploaded File
                             $post->file()->create(
                                 factory(App\PostUpload::class)->make()->toArray()
                             );
-                            // post comments
+                            // Post Comments
                             $post->comments()->createMany(
-                                factory(App\Comment::class, (int)$seedCnf->posts_comments)->states('post')->make()->toArray()
+                                factory(App\Comment::class, (int)$this->random($seedingConf->posts_comments))->states('post')->make()->toArray()
                             );
                         }
                     );
-                // category comments
+                // Category Comments
                 $category->comments()->createMany(
-                    factory(App\Comment::class, (int)$seedCnf->categories_comments)->states('category')->make()->toArray()
+                    factory(App\Comment::class, (int)$this->random($seedingConf->categories_comments))->states('category')->make()->toArray()
                 );
             }
         );
 
-        // populate the visitors table
-        factory(App\Visitor::class, (int)$seedCnf->visitors)->create();
+        // Populate the visitors table
+        factory(App\Visitor::class, (int)$this->random($seedingConf->visitors))->create();
 
+    }
+
+    /**
+     * Get a random number from the specified numbers range.
+     * 
+     * $numbersRange is a string in `from..to` format.
+     * See DB_SEED_* options in the .env.example file for more details.
+     */
+    private function random ($numbersRange, $delimiter = '..')
+    {
+        list($from, $to) = explode($delimiter, $numbersRange);
+
+        return rand((int)$from, (int)$to);
     }
 
 }

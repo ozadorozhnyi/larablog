@@ -11,10 +11,11 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Pages.
+Route::get('/', 'PageController@home')->name('home');
 
-Route::get('/home', function () {
-    return view('home');
-});
+// Categories Resource.
+Route::resource('categories', 'CategoryController');
+
+// Posts Resource.
+Route::resource('posts', 'PostController')->except(['index']);

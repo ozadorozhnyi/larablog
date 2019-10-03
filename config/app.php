@@ -17,6 +17,18 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Application Marketing Name
+    |--------------------------------------------------------------------------
+    |
+    | This value is the marketing name of your application.
+    | Used on the front-end side only, to display the application's marketing name.
+    |
+    */
+
+    'marketing_name' => env('APP_MARKETING_NAME', 'MassMedia Group'),
+
+    /*
+    |--------------------------------------------------------------------------
     | Application Environment
     |--------------------------------------------------------------------------
     |
@@ -108,53 +120,67 @@ return [
 
     'faker_locale' => 'en_US',
 
-/*
+    /*
     |--------------------------------------------------------------------------
     | Application DataBase Seeding Options
     |--------------------------------------------------------------------------
     |
     | Allows you to configure the amount of data generated for each database table.
     |
-    | The amount of data generated can bee differ, depending on the testing conditions
-    | as well as the operating mode of the application.
+    | The amount of data generated can be differ, depending on the testing conditions 
+    | and requirements as well as the operating mode of the application.
     |
     */
 
-    'app_seed' => [
+    'seeding' => [
         /**
-         * dev: 1
-         * testing: 8..18
-         * production: 10..20
+         * dev: 10
+         * testing: 10..11
+         * production: 10..11
          */
-        "categories" => env('DB_SEED_CATEGORIES', rand(10, 20)),
+        "categories" => env('DB_SEED_CATEGORIES', "10..11"),
 
         /**
-         * dev: 5
-         * testing: 5..22
-         * production: 10..20
+         * dev: 11
+         * testing: 11..21
+         * production: 11..21
          */
-        "categories_posts" => env('DB_SEED_CATEGORIES_POSTS', rand(10, 20)),
-
-        /**
-         * dev: 5
-         * testing: 3..99
-         * production: 10..99
-         */
-        "posts_comments" => env('DB_SEED_POSTS_COMMENTS', rand(10, 99)),
-
-        /**
-         * dev: 3
-         * testing: 3..6
-         * production: 6..8
-         */
-        "categories_comments" => env('DB_SEED_CATEGORIES_COMMENTS', rand(6, 8)),
+        "posts" => env('DB_SEED_POSTS', "11..21"),
 
         /**
          * dev: 10
-         * testing: 10..20
-         * production: 100..2000
+         * testing: 10..99
+         * production: 10..99
          */
-        "visitors" => env('DB_SEED_VISITORS', rand(1000, 2000)),
+        "posts_comments" => env('DB_SEED_POSTS_COMMENTS', "10..99"),
+
+        /**
+         * dev: 3
+         * testing: 3..9
+         * production: 3..9
+         */
+        "categories_comments" => env('DB_SEED_CATEGORIES_COMMENTS', "3..9"),
+
+        /**
+         * dev: 1000
+         * testing: 1000..2000
+         * production: 1000..2000
+         */
+        "visitors" => env('DB_SEED_VISITORS', "1000..2000"),
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | URLs for the Stock Images 
+    |--------------------------------------------------------------------------
+    | Added with demonstration goals only,
+    | to add images to the most commentable posts.
+    |
+    */
+
+    'stock_img_urls' => [
+        'picsum' => 'https://picsum.photos/200/265',
+        'unsplash' => 'https://source.unsplash.com/random/200x265',
     ],
 
     /*
