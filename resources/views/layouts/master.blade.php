@@ -19,7 +19,7 @@
             @include('partial.nav')
         </div>
         {{-- Main Content --}}
-        <main role="main" class="container">
+        <main role="main" class="container mt-4">
             <div class="row">
                 @yield('content')
                 {{-- Aside Partial --}}

@@ -1,4 +1,4 @@
-<header class="blog-header py-3">
+<header class="blog-header py-3 bg-light text-dark">
     <div class="row flex-nowrap justify-content-between align-items-center">
         <div class="col-12 text-center">
             <a href="{{route('home')}}" title="Go to the blog home page" class="blog-header-logo text-dark">

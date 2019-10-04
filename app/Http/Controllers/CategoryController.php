@@ -82,6 +82,47 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        $category->delete();
+
+        /**
+         * Redirect a user on to the Homepage.
+         */
+        return redirect()->route('home');
     }
+
+    /**
+     * Remove all posts, related to the specified resource.
+     *
+     * @param  \App\Category  $category
+     * @return \Illuminate\Http\Response
+     */
+    public function postsDestroy(Category $category)
+    {
+        foreach ($category->posts as $post)
+        {
+            $post->delete();
+        }
+
+        /**
+         * Redirect a user on to the Category Page.
+         */
+        return redirect()->route('categories.show', ['category'=>$category->id]);
+    }
+
+    /**
+     * Remove all comments, related to the specified resource.
+     *
+     * @param  \App\Category  $category
+     * @return \Illuminate\Http\Response
+     */
+    public function commentsDestroy(Category $category)
+    {
+        $category->comments()->delete();
+        
+        /**
+         * Redirect a user on to the Category Page.
+         */
+        return redirect()->route('categories.show', ['category'=>$category->id]);
+    }
+
 }

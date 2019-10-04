@@ -16,6 +16,18 @@ Route::get('/', 'PageController@home')->name('home');
 
 // Categories Resource.
 Route::resource('categories', 'CategoryController');
+// Remove Category Posts Only
+Route::delete('categories/{category}/posts/destroy', 'CategoryController@postsDestroy')->name('categories.posts.destroy');
+// Remove Category Comments Only
+Route::delete('categories/{category}/comments/destroy', 'CategoryController@commentsDestroy')->name('categories.comments.destroy');
+
 
 // Posts Resource.
 Route::resource('posts', 'PostController')->except(['index']);
+// Remove Uploaded File
+Route::delete('posts/{post}/uploads/destroy', 'PostController@uploadsDestroy')->name('posts.uploads.destroy');
+// Remove Post Comments Only
+Route::delete('posts/{post}/comments/destroy', 'PostController@commentsDestroy')->name('posts.comments.destroy');
+
+// Comment Resource.
+Route::resource('comments', 'CommentController')->only(['create','store']);

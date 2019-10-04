@@ -9,6 +9,6 @@ $factory->define(Post::class, function (Faker $faker) {
     return [
         'category_id' => $faker->randomDigitNotNull,
         'name' => $faker->sentence(5),
-        'content' => $faker->realText(rand(3500, 6000), 5) 
+        'content' => $faker->realText(rand(1500, 2300), 5) 
     ];
 });

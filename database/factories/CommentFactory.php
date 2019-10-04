@@ -10,7 +10,7 @@ $factory->define(Comment::class, function (Faker $faker) {
         'commentable_id' => $faker->randomDigitNotNull,
         'commentable_type' => 'App\Category', // assign to the category by default
         'author' => implode(" ", [$faker->firstNameMale, $faker->firstNameFemale]),
-        'content' => str_replace("\n", "<br>", $faker->paragraphs(rand(1,5), true))
+        'content' => $faker->paragraphs(rand(1, 5), true)
     ];
 });
 
