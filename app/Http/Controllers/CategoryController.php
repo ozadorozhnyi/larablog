@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreCategory;
+use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\Log;
 
 class CategoryController extends Controller
 {
@@ -24,18 +27,40 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('resources.category.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  App\Http\Requests\StoreCategory  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreCategory $request)
     {
-        //
+        // Retrieve the validated input data...
+        $validated = $request->validated();
+
+        try {
+            // Store a newly created resource in storage.
+            $created = Category::create([
+                'name' => $validated['name'],
+                'description' => $validated['description'],
+            ]);
+        } catch (QueryException $e) {
+            // Saves errors for the future analysis.
+            Log::error($e->getMessage());
+
+            // Saves status error message intended for human eyes into the session.
+            $request->session()
+                ->flash('status', 'Internal error occurred while store a newly created resource in storage.');
+
+            // Backs the user to the creation page against and shows error message.
+            return redirect()->route('categories.create');
+        }
+
+        return redirect()
+            ->route('categories.show', ['category'=>$created->id]);
     }
 
     /**

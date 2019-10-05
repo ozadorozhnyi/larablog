@@ -8,10 +8,6 @@
         </h5>
         <div class="p-4 mb-3 bg-light rounded">
             <div class="list-group list-group-flush">
-                {{-- Create a New Post --}}
-                <a href="{{route('posts.create')}}" title="Create a New Post" class="list-group-item list-group-item-action text-primary">
-                    Create a New Post
-                </a>
                 {{-- Edit Current Post --}}
                 <a href="{{route('posts.edit', ['post'=>$post->id])}}" title="Edit Current Post" class="list-group-item list-group-item-action text-primary">
                     Edit Current Post
@@ -77,13 +73,13 @@
         </h5>
         <div class="p-4 mb-3 bg-light rounded">
             <div class="list-group list-group-flush">
-                {{-- Create a New Category --}}
-                <a href="{{route('categories.create')}}" title="Create a New Category" class="list-group-item list-group-item-action text-primary">
-                    Create a New Category
-                </a>
                 {{-- Edit Current Category --}}
                 <a href="{{route('categories.edit', ['category'=>$category->id])}}" title="Edit Current Category" class="list-group-item list-group-item-action text-primary">
                     Edit Current Category
+                </a>
+                {{-- Create a New Post --}}
+                <a href="{{route('posts.create')}}" title="Create a New Post" class="list-group-item list-group-item-action text-primary">
+                    Create a New Post
                 </a>
                 {{-- Remove the Category --}}
                 <span>

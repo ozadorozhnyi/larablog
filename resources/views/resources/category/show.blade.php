@@ -47,6 +47,14 @@
         @else
             <div class="alert alert-warning" role="alert">
                 There is no posts found in this category. It's so sad :(
+                {{-- Proposal to create a new post in this category --}}
+                <p>
+                    But, you can 
+                    <a href="{{route('posts.create')}}" title="Create a New Post">
+                        create a new post
+                    </a>
+                    easilly ;)
+                </p>
             </div>
         @endif
     </div>
