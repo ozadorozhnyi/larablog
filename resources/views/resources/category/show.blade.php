@@ -4,6 +4,8 @@
 
 @section('content')
     <div class="col-md-8 blog-main">
+        {{-- Status Message --}}
+        @include('shared.status-alert')
         {{-- Category Header --}}
         <div class="list-group mb-3">
             <div class="list-group-item list-group-item-action shadow-sm p-3 rounded">

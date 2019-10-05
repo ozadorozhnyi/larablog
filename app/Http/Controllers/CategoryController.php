@@ -51,14 +51,13 @@ class CategoryController extends Controller
             // Saves errors for the future analysis.
             Log::error($e->getMessage());
 
-            // Saves status error message intended for human eyes into the session.
-            $request->session()
-                ->flash('status', 'Internal error occurred while store a newly created resource in storage.');
+            // Sets up status message
+            \Session::flash('status', 'Internal error occurred while store a newly created resource in storage.');
 
             // Backs the user to the creation page against and shows error message.
             return redirect()->route('categories.create');
         }
-
+        
         return redirect()
             ->route('categories.show', ['category'=>$created->id]);
     }
@@ -84,19 +83,34 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+        return view('resources.category.edit', [
+            'category' => $category
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  App\Http\Requests\StoreCategory  $request
      * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Category $category)
+    public function update(StoreCategory $request, Category $category)
     {
-        //
+        // Retrieve the validated input data...
+        $validated = $request->validated();
+
+        $category->name = $validated['name'];
+        $category->description = $validated['description'];
+
+        // Update the specified resource in storage.
+        $category->save();
+
+        // Sets up status message
+        \Session::flash('status', 'Data was successfully updated.');
+
+        return redirect()
+            ->route('categories.show', ['category'=>$category->id]);
     }
 
     /**
@@ -128,6 +142,9 @@ class CategoryController extends Controller
             $post->delete();
         }
 
+        // Sets up status message
+        \Session::flash('status', 'All related posts was successfully removed.');
+
         /**
          * Redirect a user on to the Category Page.
          */
@@ -144,6 +161,9 @@ class CategoryController extends Controller
     {
         $category->comments()->delete();
         
+        // Sets up status message
+        \Session::flash('status', 'All related comments was successfully removed.');
+
         /**
          * Redirect a user on to the Category Page.
          */

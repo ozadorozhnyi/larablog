@@ -1,25 +1,26 @@
 @extends('layouts.master')
 
-@section('title', "Create a New Category")
+@section('title', "Edit Category")
 
 @section('content')
     <div class="col-md-8 blog-main">
         {{-- Status Message --}}
         @include('shared.status-alert')
-        {{-- Create Category --}}
+        {{-- Edit Category --}}
         <div class="shadow-sm p-3 mb-5 bg-white rounded">
             <h5 class="pb-3">
-                Create A New Category
+                Edit Category
             </h5>
             {{-- Form --}}
-            <form action="{{route('categories.store')}}" method="POST">
+            <form action="{{route('categories.update', ['category'=>$category->id])}}" method="POST">
+                @method('PATCH')
                 @csrf
                 {{-- Name --}}
                 <div class="form-group">
                     <label for="name">
                         <span class="text-danger">*</span>Name
                     </label>
-                    <input type="text" name="name" value="{{old('name')}}" id="name" class="form-control @error('name') is-invalid @enderror" aria-describedby="nameHelp" placeholder="Enter category name" minlength="3" maxlength="128" autofocus required>
+                    <input type="text" name="name" value="{{$category->name}}" id="name" class="form-control @error('name') is-invalid @enderror" aria-describedby="nameHelp" placeholder="Enter category name" minlength="3" maxlength="128" autofocus required>
                     @error('name')
                         <div class="invalid-feedback">
                             {{ $message }}
@@ -34,7 +35,7 @@
                     <label for="description">
                         <span class="text-danger">*</span>Description
                     </label>
-                    <textarea name="description" id="description" class="form-control @error('description') is-invalid @enderror" rows="3" aria-describedby="descriptionHelp" placeholder="Enter category description" minlength="3" maxlength="255" required >{{old('description')}}</textarea>
+                    <textarea name="description" id="description" class="form-control @error('description') is-invalid @enderror" rows="3" aria-describedby="descriptionHelp" placeholder="Enter category description" minlength="3" maxlength="255" required >{{$category->description}}</textarea>
                     @error('description')
                         <div class="invalid-feedback">
                             {{ $message }}
@@ -44,12 +45,12 @@
                         Maximum length is 255 characters.
                     </small>
                 </div>
-                {{-- Submit Form Button --}}
-                <button type="submit" name="submitBtn" value="create" title="Create a New Category" class="btn btn-primary">
-                    Create
+                {{-- Submit Form --}}
+                <button type="submit" name="submitBtn" value="update" title="Update Category" class="btn btn-primary">
+                    Update
                 </button>
-                {{-- Cancel Creation --}}
-                <a href="{{route('home')}}" title="Cancel and back to the Homepage" class="btn btn-outline-secondary">
+                {{-- Cancel Updating --}}
+                <a href="{{route('categories.show', ['category'=>$category->id])}}" title="Back to the Category Page" class="btn btn-outline-secondary">
                     Cancel
                 </a>
             </form>

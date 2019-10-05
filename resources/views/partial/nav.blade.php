@@ -2,9 +2,8 @@
     <div class="nav-scroller py-1">
         <nav class="nav d-flex justify-content-between bg-danger">
             @foreach ($categories as $category)
-                <a href="{{route('categories.show', ['category'=>$category->id])}}
-                    "title="Goto the Category Page" class="p-2 text-white">
-                        {{$category->name}}
+                <a href="{{route('categories.show', ['category'=>$category->id])}}" title="Goto the Category Page" class="p-2 text-white">
+                    {{$category->name}}
                 </a>
             @endforeach
         </nav>
