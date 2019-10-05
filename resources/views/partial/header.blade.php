@@ -8,8 +8,8 @@
             </a>
         </div>
         {{-- Create A New Category (Qweek Link) --}}
-        <div class="col-4 d-flex justify-content-end align-items-center px-2">
-            <a href="{{route('categories.create')}}" title="Create a New Category" class="btn btn-sm btn-outline-success">
+        <div class="col-4 d-flex justify-content-end align-items-center">
+            <a href="{{route('categories.create')}}" title="Create a New Category" class="btn btn-sm btn-outline-success mr-4">
                 Create A New Category
             </a>
         </div>

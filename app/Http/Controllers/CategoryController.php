@@ -76,6 +76,19 @@ class CategoryController extends Controller
     }
 
     /**
+     * Display all comments, assigned to the specified resource.
+     *
+     * @param  \App\Category  $category
+     * @return \Illuminate\Http\Response
+     */
+    public function comments(Category $category)
+    {
+        return view('resources.category.comments', [
+            'category' => $category
+        ]);
+    }
+
+    /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\Category  $category

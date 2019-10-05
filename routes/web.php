@@ -18,6 +18,8 @@ Route::get('/', 'PageController@home')->name('home');
 Route::resource('categories', 'CategoryController');
 // Remove Category Posts Only
 Route::delete('categories/{category}/posts/destroy', 'CategoryController@postsDestroy')->name('categories.posts.destroy');
+// List Category Comments
+Route::get('categories/{category}/comments/', 'CategoryController@comments')->name('categories.comments');
 // Remove Category Comments Only
 Route::delete('categories/{category}/comments/destroy', 'CategoryController@commentsDestroy')->name('categories.comments.destroy');
 

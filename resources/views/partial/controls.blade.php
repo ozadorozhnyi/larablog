@@ -1,4 +1,5 @@
 @php $currentRouteName = Route::currentRouteName() @endphp
+
 @switch($currentRouteName)
     {{-- Manage Post Resource --}}
     @case("posts.show")
@@ -67,6 +68,7 @@
 
     {{-- Manage Category Resource --}}
     @case("categories.show")
+    @case("categories.comments")
         @php $resourceType = 'Category' @endphp
         <h5 class="pl-4">
             Manage {{$resourceType}} Resource
@@ -81,6 +83,15 @@
                 <a href="{{route('posts.create')}}" title="Create a New Post" class="list-group-item list-group-item-action text-primary">
                     Create a New Post
                 </a>
+                @if ("categories.comments" !== $currentRouteName)
+                    {{-- List Categories Comments --}}
+                    <a href="{{route('categories.comments', ['category'=>$category->id])}}" title="List Category Comments" class="list-group-item list-group-item-action text-primary">
+                        Category Comments
+                        <span class="badge badge-primary">
+                            {{$category->comments->count()}}
+                        </span>
+                    </a>    
+                @endif
                 {{-- Remove the Category --}}
                 <span>
                     <form action="{{route('categories.destroy',['category'=>$category->id])}}" method="POST">
