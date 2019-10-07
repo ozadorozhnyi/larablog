@@ -207,6 +207,17 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Blank File Name
+    |--------------------------------------------------------------------------
+    | This file is used by default 
+    | to generate and seeding the storage with uploads.
+    |
+    */
+
+    'blank_file_name' => 'Mazda.pdf',
+
+    /*
+    |--------------------------------------------------------------------------
     | Allowed File MIME Types 
     |--------------------------------------------------------------------------
     | File mime types approved to the uploaded files.

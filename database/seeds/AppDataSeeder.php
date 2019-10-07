@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Filesystem\Filesystem;
 
 class AppDataSeeder extends Seeder
 {
@@ -13,6 +15,11 @@ class AppDataSeeder extends Seeder
     {
         $seedingConf = (object)config('app.seeding');
 
+        // Remove all previously created files
+        Storage::delete(
+            Storage::files(config('app.uploads_dir_name'))
+        );
+
         // Populate the tables with categories, posts, comments and uploaded files
         factory(App\Category::class, (int)$this->random($seedingConf->categories))->create()->each(
             function ($category) use ($seedingConf) {
@@ -21,9 +28,13 @@ class AppDataSeeder extends Seeder
                     factory(App\Post::class, (int)$this->random($seedingConf->posts))->make()->toArray())->each(
                         function ($post) use ($seedingConf) {
                             // Post Uploaded File
-                            $post->file()->create(
-                                factory(App\PostUpload::class)->states('predefined')->make()->toArray()
+                            $file = $post->file()->create(
+                                factory(App\PostUpload::class)->make()->toArray()
                             );
+
+                            // Create a file physically, by moving blank file
+                            Storage::copy(config('app.blank_file_name'), $file->path);
+
                             // Post Comments
                             $post->comments()->createMany(
                                 factory(App\Comment::class, (int)$this->random($seedingConf->posts_comments))->states('post')->make()->toArray()
@@ -53,6 +64,17 @@ class AppDataSeeder extends Seeder
         list($from, $to) = explode($delimiter, $numbersRange);
 
         return rand((int)$from, (int)$to);
+    }
+
+    /**
+     * It's a good idea to display the amount of data generated for each entity
+     * after finished seeding process.
+     * 
+     * @todo make this optional function if time is left
+     */
+    private function seedLog()
+    {
+        // @todo optional (because it's for me only)
     }
 
 }

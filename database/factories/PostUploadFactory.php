@@ -7,8 +7,8 @@ use Faker\Generator as Faker;
 
 $factory->define(PostUpload::class, function (Faker $faker) {
 
-    $sha1 = $faker->sha1;
-    $fileExtension = $faker->fileExtension;
+    $sha1 = $faker->unique()->sha1;
+    $fileExtension = 'pdf';
     $fileOriginal = ucfirst(implode('_', $faker->words(rand(2,5))));
 
     return [
