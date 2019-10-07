@@ -4,17 +4,25 @@
 </h5>
 
 {{-- Create Comment Form --}}
-@include('resources.comment.create')
+@include('resources.comment.create', [
+    'commentableId' => $post->id,
+    'commentableType' => 'post'
+])
 
 @if ($commentsQty > 0)
     <h6 class="ml-4 pt-4">
         Other peoples says:
     </h6>
+
+    {{-- Sort Collection --}}
+    @php $sorted = $post->comments->sortByDesc('updated_at') @endphp
+
     {{-- 
         Combines loops and includes to display all Comments 
         related with the current Post 
     --}}
-    @each('resources.comment.index', $post->comments, 'comment')    
+    
+    @each('resources.comment.index', $sorted, 'comment')    
 @else
     <p class="py-3">
         Be first, who leaves a comment for this post.

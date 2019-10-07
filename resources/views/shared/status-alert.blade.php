@@ -11,7 +11,7 @@
     {{-- Hide Status Message --}}
     <script>
         $(document).ready(function(){
-            $('#status-alert').delay(2000).fadeOut(2500);
+            $('#status-alert').delay(2500).fadeOut("slow");
         });
     </script>
     

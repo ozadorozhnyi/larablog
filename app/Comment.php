@@ -32,4 +32,33 @@ class Comment extends Model
     {
         return $this->morphTo();
     }
+
+    /**
+     * This method is used to determine owner of this object.
+     * Only Category or Post can has comments in the current 
+     * realization.
+     * 
+     * @param int $id (not used right now)
+     * @param string $classAlias
+     * 
+     * @return string
+     */
+    public static function getcommentableClass($id, $classAlias)
+    {
+        /**
+         * This value can and should be injected 
+         * to make the code more flexible and supported.
+         * 
+         * Or, you can change this method
+         * by adding functionallity to check morphTo(), yours choice...
+         * 
+         * More simple way is used here.
+         */
+        $commentables = [
+            "category" => 'App\Category',
+            "post" => 'App\Post',
+        ];
+
+        return $commentables[$classAlias];
+    }
 }

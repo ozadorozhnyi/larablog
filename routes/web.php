@@ -50,4 +50,4 @@ Route::get('download/attachment/{file}', function (App\PostUpload $file)
 })->name('download.attachment');
 
 // Comment Resource.
-Route::resource('comments', 'CommentController')->only(['create','store']);
+Route::resource('comments', 'CommentController')->only(['store']);
