@@ -35,6 +35,10 @@ class AppDataSeeder extends Seeder
                             // Create a file physically, by moving blank file
                             Storage::copy(config('app.blank_file_name'), $file->path);
 
+                            // Update & save original file size.
+                            $file->bytes = Storage::size($file->path);
+                            $file->save();
+
                             // Post Comments
                             $post->comments()->createMany(
                                 factory(App\Comment::class, (int)$this->random($seedingConf->posts_comments))->states('post')->make()->toArray()
