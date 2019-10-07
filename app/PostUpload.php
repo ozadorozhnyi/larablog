@@ -20,9 +20,11 @@ class PostUpload extends Model
      */
     protected $fillable = [
         'post_id',
-        'hash',
-        'original',
-        'bytes'
+        'path',
+        'name_original',
+        'name_hash',
+        'extension',
+        'bytes',
     ];
 
     /**
@@ -31,6 +33,16 @@ class PostUpload extends Model
     public function post()
     {
         return $this->belongsTo('App\Post');
+    }
+
+    /**
+     * Get the route key for the model.
+     * 
+     * @return string
+     */
+    public function getRouteKeyName()
+    {
+        return 'name_hash';
     }
 
 }

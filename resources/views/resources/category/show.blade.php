@@ -16,11 +16,15 @@
         
         {{-- Category Posts --}}
         @if ($category->posts->count() > 0)
+
+            {{-- Sort Collection --}}
+            @php $sorted = $category->posts->sortByDesc('updated_at') @endphp
+
             {{-- 
                 Combines loops and includes to display all Comments 
                 related with the current Post 
             --}}
-            @each('resources.post.index', $category->posts, 'post')
+            @each('resources.post.index', $sorted, 'post')
         @else
             <div class="alert alert-warning" role="alert">
                 There is no posts found in this category. It's so sad :(

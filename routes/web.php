@@ -27,9 +27,27 @@ Route::delete('categories/{category}/comments/destroy', 'CategoryController@comm
 // Posts Resource.
 Route::resource('posts', 'PostController')->except(['index']);
 // Remove Uploaded File
-Route::delete('posts/{post}/uploads/destroy', 'PostController@uploadsDestroy')->name('posts.uploads.destroy');
+Route::delete('posts/{post}/uploads/destroy/{routeBack?}', 'PostController@uploadsDestroy')->name('posts.uploads.destroy');
 // Remove Post Comments Only
 Route::delete('posts/{post}/comments/destroy', 'PostController@commentsDestroy')->name('posts.comments.destroy');
+
+// Download Attached Files
+Route::get('download/attachment/{file}', function (App\PostUpload $file)
+{
+    /**
+     * We should check file existance 
+     * before start downloading
+     */
+    if (Storage::exists($file->path))
+    {
+        // Just use hashed file name here.
+        return Storage::download($file->path);
+    }
+
+    // Not Found
+    return abort(404);
+
+})->name('download.attachment');
 
 // Comment Resource.
 Route::resource('comments', 'CommentController')->only(['create','store']);

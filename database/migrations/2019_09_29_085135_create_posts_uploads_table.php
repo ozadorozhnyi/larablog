@@ -16,8 +16,10 @@ class CreatePostsUploadsTable extends Migration
         Schema::create('posts_uploads', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('post_id');
-            $table->char('hash', 40)->comment('used by the app only');
-            $table->string('original', 255)->comment('for the human eyes');
+            $table->string('path', 128)->comment('path, where file is physically stored');
+            $table->string('name_original', 255)->comment('for the human eyes');
+            $table->char('name_hash', 40)->comment('gen. and used by the app only');
+            $table->string('extension', 10);
             $table->unsignedBigInteger('bytes')->comment('size, for the stats in future...');
             $table->timestamps();
         });

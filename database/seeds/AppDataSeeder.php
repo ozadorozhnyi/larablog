@@ -22,7 +22,7 @@ class AppDataSeeder extends Seeder
                         function ($post) use ($seedingConf) {
                             // Post Uploaded File
                             $post->file()->create(
-                                factory(App\PostUpload::class)->make()->toArray()
+                                factory(App\PostUpload::class)->states('predefined')->make()->toArray()
                             );
                             // Post Comments
                             $post->comments()->createMany(

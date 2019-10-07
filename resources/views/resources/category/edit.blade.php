@@ -3,18 +3,24 @@
 @section('title', "Edit Category")
 
 @section('content')
+
     <div class="col-md-8 blog-main">
+
         {{-- Status Message --}}
         @include('shared.status-alert')
+
         {{-- Edit Category --}}
         <div class="shadow-sm p-3 mb-5 bg-white rounded">
+
             <h5 class="pb-3">
                 Edit Category
             </h5>
+
             {{-- Form --}}
             <form action="{{route('categories.update', ['category'=>$category->id])}}" method="POST">
                 @method('PATCH')
                 @csrf
+
                 {{-- Name --}}
                 <div class="form-group">
                     <label for="name">
@@ -30,6 +36,7 @@
                         Maximum length is 128 characters.
                     </small>
                 </div>
+
                 {{-- Description --}}
                 <div class="form-group">
                     <label for="description">
@@ -45,15 +52,40 @@
                         Maximum length is 255 characters.
                     </small>
                 </div>
-                {{-- Submit Form --}}
-                <button type="submit" name="submitBtn" value="update" title="Update Category" class="btn btn-primary">
-                    Update
-                </button>
-                {{-- Cancel Updating --}}
-                <a href="{{route('categories.show', ['category'=>$category->id])}}" title="Back to the Category Page" class="btn btn-outline-secondary">
-                    Cancel
-                </a>
+
+                {{-- Created At --}}
+                <div class="form-group">
+                    <label for="created_at">
+                        Created At
+                    </label>
+                    <input class="form-control" type="text" placeholder="{{$category->created_at->format('M d, Y')}}" disabled readonly>
+                </div>
+
+                {{-- Updated At --}}
+                <div class="form-group">
+                    <label for="created_at">
+                        Last Updated At
+                    </label>
+                    <input class="form-control" type="text" placeholder="{{$category->created_at->diffForHumans()}}" disabled readonly>
+                </div>
+                
+                <div class="pt-2">
+
+                    {{-- Submit Form --}}
+                    <button type="submit" name="submitBtn" value="update" title="Update Category" class="btn btn-primary">
+                        Update
+                    </button>
+    
+                    {{-- Cancel Updating --}}
+                    <a href="{{route('categories.show', ['category'=>$category->id])}}" title="Back to the Category Page" class="btn btn-outline-secondary">
+                        Cancel
+                    </a>
+                    
+                </div>
+
             </form>
+
         </div>
     </div>
+
 @endsection

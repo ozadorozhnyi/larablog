@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class Post extends Model
 {
@@ -63,15 +64,33 @@ class Post extends Model
          * Physically removes a file, uploaded for this instance before
          * and remove all relation in the database table.
          * 
-         * @todo add this functionality here
          */
-
+        $this->fileDelete();
 
         /**
          * Remove this instance.
          */
         return parent::delete();
+    }
 
+    /**
+     * Physically removes a file, uploaded for this instance before
+     * and remove all relation in the database table.
+     * 
+     */
+    public function fileDelete()
+    {
+        if ((int)$this->file()->count() > 0)
+        {
+            if (Storage::exists($this->file->path)) 
+            {
+                // Physically remove the file from the disk storage.
+                Storage::delete($this->file->path);
+            }
+
+            // Remove relation in the database.
+            $this->file()->delete();
+        }
     }
     
 }

@@ -185,6 +185,43 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Uploaded File Max Size 
+    |--------------------------------------------------------------------------
+    | The maximum size of an uploaded file.
+    | Specified in kilobytes.
+    |
+    */
+
+    'upload_max_filesize' => 2048,
+
+    /*
+    |--------------------------------------------------------------------------
+    | Uploads Directory Name
+    |--------------------------------------------------------------------------
+    | The name of the directory 
+    | in which all downloaded files are stored
+    |
+    */
+
+    'uploads_dir_name' => 'uploads',
+
+    /*
+    |--------------------------------------------------------------------------
+    | Allowed File MIME Types 
+    |--------------------------------------------------------------------------
+    | File mime types approved to the uploaded files.
+    | You can add new or remove an existing one.
+    |
+    | By default only pdf files are accepted.
+    |
+    */
+
+    'upload_mimes' => [
+        'pdf',
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
     | Encryption Key
     |--------------------------------------------------------------------------
     |

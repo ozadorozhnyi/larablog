@@ -1,10 +1,10 @@
-<header class="blog-header py-3 bg-light text-dark">
+<header class="blog-header py-3 text-dark">
     <div class="row flex-nowrap justify-content-between align-items-center">
         <div class="col-4 pt-1">&nbsp;</div>
         {{-- Yankee go home --}}
         <div class="col-4 text-center">
             <a href="{{route('home')}}" title="Go to the blog home page" class="blog-header-logo text-dark">
-                {{config('app.marketing_name')}}
+                MassMedia Blog
             </a>
         </div>
         {{-- Create A New Category (Qweek Link) --}}
