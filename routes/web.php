@@ -51,3 +51,6 @@ Route::get('download/attachment/{file}', function (App\PostUpload $file)
 
 // Comment Resource.
 Route::resource('comments', 'CommentController')->only(['store']);
+// Process Ajax-requests
+Route::post('comments/store/async', 'CommentController@storeAsync')
+    ->name('comments.store.async');
