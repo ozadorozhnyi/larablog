@@ -109,7 +109,8 @@ class CommentController extends Controller
 
         // Send error message intended for the human eyes back
         $this->AsyncResponse(
-            'Your comment has been successfully saved and will appear soon.'
+            'Your comment has been successfully saved and will appear soon.',
+            'ok'
         );
     }
 
@@ -119,10 +120,22 @@ class CommentController extends Controller
      * 
      * @param strign $str
      */
-    private function AsyncResponse($str)
+    private function AsyncResponse($str, $status = 'error')
     {
-        echo $str;
+        echo json_encode([
+            'status'=>$status,
+            'text'=>$str
+        ]);
+
         exit;
+    }
+
+    public function testAsync()
+    {
+        echo json_encode([
+            'status'=>'error',
+            'text'=>'error text goes there...'.rand(12,23)
+        ]);
     }
 
 }

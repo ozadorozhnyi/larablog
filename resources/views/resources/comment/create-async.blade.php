@@ -24,7 +24,7 @@
                 <input type="text" name="first_name" value="{{old('first_name')}}" 
                     id="first_name" class="form-control @error('first_name') is-invalid @enderror" 
                     placeholder="First name" 
-                    {{-- minlength="3" maxlength="32"  --}}
+                    minlength="3" maxlength="32"
                     required autofocus>
                 @error('first_name')
                     <div class="invalid-feedback">
@@ -41,7 +41,7 @@
                 <input type="text" name="last_name" value="{{old('last_name')}}" 
                     id="last_name" class="form-control @error('last_name') is-invalid @enderror" 
                     placeholder="Last name" 
-                    {{-- minlength="3" maxlength="32"  --}}
+                    minlength="3" maxlength="32"
                     required>
                 @error('last_name')
                     <div class="invalid-feedback">
@@ -106,10 +106,26 @@
                     url : post_url,
                     type: request_method,
                     data : form_data
-                }).done(function(response) {
-                    // Assign & display server response here...
-                    $("#server-response").addClass("alert alert-primary py-2").fadeIn().html(response);
-                    $("#server-response").delay(8500).fadeOut("slow");
+                }).done(function(response)
+                {
+                    var respMsg = $.parseJSON(response);
+                    if ('error' == respMsg.status) {
+                        // display error message
+                        $("#server-response").addClass("alert alert-danger py-2").fadeIn().html(respMsg.text);
+                    } else {
+                        // Clear form (@todo after success response)
+                        $("#comments-store-async").trigger("reset");
+
+                        // just display status message
+                        $("#server-response").removeClass("alert alert-danger py-2").addClass("alert alert-primary py-2");
+                        $("#server-response").fadeIn().html(respMsg.text);
+
+                        // Hide status message with a server response.
+                        $("#server-response").delay(4000).fadeOut("slow");
+
+                        // restart browser after delay
+                        setTimeout(location.reload.bind(location), 5000);
+                    }
                 });
             });
         });
