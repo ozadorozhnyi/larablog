@@ -20,7 +20,7 @@
         </h5>
 
         {{-- Create Comment Form --}}
-        @include('resources.comment.create', [
+        @include('resources.comment.create-async', [
             'commentableId' => $category->id,
             'commentableType' => 'category'
         ])
